@@ -1,7 +1,6 @@
 package outbounds
 
 import (
-	"crypto/tls"
 	"errors"
 	"io"
 	"net/url"
@@ -21,5 +20,3 @@ func NewClient(serverURL *url.URL, ech string) (ProxyClient, error) {
 type ProxyClient interface {
 	Relay(target string, r io.ReadCloser) (io.ReadCloser, error)
 }
-
-const x25519Kyber768Draft00 tls.CurveID = 0x6399 // X25519Kyber768Draft00

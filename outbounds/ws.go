@@ -26,8 +26,7 @@ func NewWsClient(wurl *url.URL, ech string) (*WsClient, error) {
 
 	dialer := *websocket.DefaultDialer
 	dialer.TLSClientConfig = &tls.Config{
-		CurvePreferences: []tls.CurveID{x25519Kyber768Draft00},
-		MinVersion:       tls.VersionTLS13,
+		MinVersion: tls.VersionTLS13,
 	}
 	if len(ech) > 0 {
 		echConfigListBytes, err := base64.StdEncoding.DecodeString(ech)

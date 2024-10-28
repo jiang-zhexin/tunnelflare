@@ -26,9 +26,8 @@ func NewHttp2Client(h2url *url.URL, ech string) (*Http2Client, error) {
 
 	h2Transport := &http2.Transport{
 		TLSClientConfig: &tls.Config{
-			CurvePreferences: []tls.CurveID{x25519Kyber768Draft00},
-			MinVersion:       tls.VersionTLS13,
-			NextProtos:       []string{"h2", "http/1.1"},
+			MinVersion: tls.VersionTLS13,
+			NextProtos: []string{"h2", "http/1.1"},
 		},
 		DialTLSContext: func(ctx context.Context, network, addr string, config *tls.Config) (net.Conn, error) {
 			if len(ech) > 0 {
