@@ -74,7 +74,9 @@ func NewHttp2Client(h2url *url.URL, ech string) (*Http2Client, error) {
 
 func (hc *Http2Client) Relay(target string, r io.ReadCloser) (io.ReadCloser, error) {
 	request := hc.request.Clone(context.Background())
-	request.Header.Set("Target", target)
+	q := request.URL.Query()
+	q.Set("target", target)
+	request.URL.RawQuery = q.Encode()
 	request.Body = r
 	response, err := hc.h2Transport.RoundTrip(request)
 	if err != nil {

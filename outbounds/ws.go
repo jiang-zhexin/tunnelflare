@@ -68,9 +68,11 @@ func NewWsClient(wurl *url.URL, ech string) (*WsClient, error) {
 }
 
 func (w *WsClient) Relay(target string, r io.ReadCloser) (io.ReadCloser, error) {
-	headers := w.headers.Clone()
-	headers.Add("Target", target)
-	conn, _, err := w.dialer.Dial(w.server.String(), headers)
+	q := w.server.Query()
+	q.Set("target", target)
+	server := *w.server
+	server.RawQuery = q.Encode()
+	conn, _, err := w.dialer.Dial(server.String(), w.headers)
 	if err != nil {
 		return nil, err
 	}
