@@ -1,3 +1,6 @@
+> [!WARNING]
+> 此用法可能违反 [Cloudflare 的 TOS](https://www.cloudflare.com/terms/#:~:text=use%20the%20Services%20to%20provide%20a%20virtual%20private%20network%20or%20other%20similar%20proxy%20services.)，引起封禁域名、账号等后果，本仓库概不负责
+
 # How to use?
 * 将 `workers/index.ts` 中的内容部署到 cloudflare workers 上
 * 添加自己的域名至 workers，并配置该域允许通过 grpc 流量
